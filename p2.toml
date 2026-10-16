@@ -38,6 +38,13 @@ weights = [1, 2]
 # Each system votes only for its top `depth` documents (or chunks); 0 means its whole ranking.
 depth = 100
 
+[rerank]
+# The system whose top `candidates` documents (or chunks) Claude reorders, and how many
+# characters of each one Claude sees.
+first_stage = "hybrid"
+candidates = 20
+passage_chars = 600
+
 [answer]
 # How many chunks `p2 answer` sends to Claude with each question.
 top = 5

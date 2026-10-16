@@ -37,6 +37,7 @@ Scores per system.
 | bm25 | 0.625 | 0.507 | 0.518 |
 | dense | 0.558 | 0.562 | 0.480 |
 | hybrid | 0.592 | 0.535 | 0.485 |
+| rerank | 0.613 | 0.700 | 0.628 |
 
 20 judged queries; nDCG uses binary labels; a random ranking of the 2,484 documents would get recall@10 near 0.004.
 <!-- p2:end shared-practice -->
@@ -55,6 +56,9 @@ The same scores per query class.
 | hybrid | Recall@10 | 0.357 | 0.548 | 0.917 |
 | hybrid | MRR@10 | 0.500 | 0.421 | 0.708 |
 | hybrid | nDCG@10 | 0.356 | 0.425 | 0.704 |
+| rerank | Recall@10 | 0.321 | 0.643 | 0.917 |
+| rerank | MRR@10 | 0.429 | 0.714 | 1.000 |
+| rerank | nDCG@10 | 0.338 | 0.654 | 0.936 |
 <!-- p2:end shared-practice-classes -->
 
 Differences between every pair of systems, each with its paired interval and the minimum detectable difference.
@@ -71,6 +75,15 @@ Differences between every pair of systems, each with its paired interval and the
 | hybrid minus dense | Recall@10 | +0.033 | [-0.033, +0.117] | 0.110 | not distinguishable |
 | hybrid minus dense | MRR@10 | -0.028 | [-0.182, +0.113] | 0.215 | not distinguishable |
 | hybrid minus dense | nDCG@10 | +0.005 | [-0.096, +0.097] | 0.141 | not distinguishable |
+| rerank minus bm25 | Recall@10 | -0.013 | [-0.300, +0.275] | 0.420 | not distinguishable |
+| rerank minus bm25 | MRR@10 | +0.193 | [-0.083, +0.462] | 0.398 | not distinguishable |
+| rerank minus bm25 | nDCG@10 | +0.110 | [-0.168, +0.375] | 0.393 | not distinguishable |
+| rerank minus dense | Recall@10 | +0.054 | [-0.033, +0.146] | 0.134 | not distinguishable |
+| rerank minus dense | MRR@10 | +0.138 | [-0.046, +0.325] | 0.270 | not distinguishable |
+| rerank minus dense | nDCG@10 | +0.148 | [+0.022, +0.281] | 0.188 | rerank higher |
+| rerank minus hybrid | Recall@10 | +0.021 | [-0.062, +0.104] | 0.127 | not distinguishable |
+| rerank minus hybrid | MRR@10 | +0.165 | [-0.013, +0.340] | 0.258 | not distinguishable |
+| rerank minus hybrid | nDCG@10 | +0.143 | [+0.017, +0.266] | 0.181 | rerank higher |
 
 The interval is a paired bootstrap (10,000 resamples of the queries); MDD is the smallest difference this many queries detect 80% of the time.
 <!-- p2:end shared-practice-pairs -->
@@ -242,7 +255,23 @@ _No judged answers yet (stretch option 2): `uv run p2 judge answers/shared/LABEL
 The Claude calls, tokens and seconds in every trace you committed, and what a cheaper system or answers file saves against what it loses.
 
 <!-- p2:begin stretch-cost -->
-_No Claude traces yet: a run of a system that calls Claude, `p2 answer` and `p2 judge` write them in traces/, and then `uv run p2 score` fills this table._
+Every trace in traces/ that records a Claude call:
+
+| Trace | System | Spans | Claude calls | Saved | Input tokens | Output tokens | Seconds | Input per span | Output per span | Seconds per span |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| traces/shared-practice-rerank.jsonl | rerank | 20 | 20 | 2 | 337,063 | 14,535 | 199.0 | 16,853 | 727 | 9.9 |
+
+A span is one query of a run, one question of an answers file, or one claim of a judged file. A saved reply costs nothing now, so it counts the tokens and the seconds of the call that made it.
+
+Every pair of systems on the same queries where at least one calls Claude, the one with fewer Claude input tokens per query first:
+
+| Cheaper minus dearer | Queries | MRR@10 difference | 95% interval | Input tokens saved per query | Seconds saved per query | Reading |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| shared practice: bm25 minus rerank | 20 | -0.193 | [-0.462, +0.083] | 16,853 | 9.9 | not distinguishable |
+| shared practice: dense minus rerank | 20 | -0.138 | [-0.325, +0.046] | 16,853 | 9.9 | not distinguishable |
+| shared practice: hybrid minus rerank | 20 | -0.165 | [-0.340, +0.013] | 16,853 | 9.9 | not distinguishable |
+
+The difference is the cheaper system's score minus the dearer one's, with its paired interval; the savings count Claude calls only, so a system that makes none saves all of the other's.
 
 Systems that do not call Claude, from traces/retrieval/ on the machine that last ran `p2 score` (git ignores that folder, so `p2 check` does not compare this part):
 
