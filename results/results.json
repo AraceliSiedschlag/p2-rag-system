@@ -276,6 +276,136 @@
               "ndcg@10": 0.613147
             }
           }
+        },
+        "hybrid": {
+          "run": "runs/shared/hybrid.practice.trec",
+          "mean": {
+            "recall@10": 0.591667,
+            "mrr@10": 0.535,
+            "ndcg@10": 0.484667
+          },
+          "by_class": {
+            "identifier": {
+              "n": 7,
+              "recall@10": 0.357143,
+              "mrr@10": 0.5,
+              "ndcg@10": 0.355785
+            },
+            "paraphrase": {
+              "n": 7,
+              "recall@10": 0.547619,
+              "mrr@10": 0.421429,
+              "ndcg@10": 0.425349
+            },
+            "mixed": {
+              "n": 6,
+              "recall@10": 0.916667,
+              "mrr@10": 0.708333,
+              "ndcg@10": 0.704234
+            }
+          },
+          "per_query": {
+            "p01": {
+              "recall@10": 0.5,
+              "mrr@10": 0.5,
+              "ndcg@10": 0.386853
+            },
+            "p02": {
+              "recall@10": 0.0,
+              "mrr@10": 0.0,
+              "ndcg@10": 0.0
+            },
+            "p03": {
+              "recall@10": 0.0,
+              "mrr@10": 0.0,
+              "ndcg@10": 0.0
+            },
+            "p04": {
+              "recall@10": 1.0,
+              "mrr@10": 1.0,
+              "ndcg@10": 0.87735
+            },
+            "p05": {
+              "recall@10": 0.5,
+              "mrr@10": 1.0,
+              "ndcg@10": 0.613147
+            },
+            "p06": {
+              "recall@10": 0.0,
+              "mrr@10": 0.0,
+              "ndcg@10": 0.0
+            },
+            "p07": {
+              "recall@10": 0.5,
+              "mrr@10": 1.0,
+              "ndcg@10": 0.613147
+            },
+            "p08": {
+              "recall@10": 0.666667,
+              "mrr@10": 0.2,
+              "ndcg@10": 0.337968
+            },
+            "p09": {
+              "recall@10": 0.666667,
+              "mrr@10": 0.5,
+              "ndcg@10": 0.498189
+            },
+            "p10": {
+              "recall@10": 0.0,
+              "mrr@10": 0.0,
+              "ndcg@10": 0.0
+            },
+            "p11": {
+              "recall@10": 1.0,
+              "mrr@10": 1.0,
+              "ndcg@10": 1.0
+            },
+            "p12": {
+              "recall@10": 0.5,
+              "mrr@10": 0.25,
+              "ndcg@10": 0.264068
+            },
+            "p13": {
+              "recall@10": 1.0,
+              "mrr@10": 1.0,
+              "ndcg@10": 0.877215
+            },
+            "p14": {
+              "recall@10": 0.0,
+              "mrr@10": 0.0,
+              "ndcg@10": 0.0
+            },
+            "p15": {
+              "recall@10": 1.0,
+              "mrr@10": 1.0,
+              "ndcg@10": 0.919721
+            },
+            "p16": {
+              "recall@10": 1.0,
+              "mrr@10": 0.5,
+              "ndcg@10": 0.63093
+            },
+            "p17": {
+              "recall@10": 1.0,
+              "mrr@10": 0.5,
+              "ndcg@10": 0.63093
+            },
+            "p18": {
+              "recall@10": 1.0,
+              "mrr@10": 1.0,
+              "ndcg@10": 1.0
+            },
+            "p19": {
+              "recall@10": 1.0,
+              "mrr@10": 0.25,
+              "ndcg@10": 0.430677
+            },
+            "p20": {
+              "recall@10": 0.5,
+              "mrr@10": 1.0,
+              "ndcg@10": 0.613147
+            }
+          }
         }
       },
       "pairs": [
@@ -320,6 +450,90 @@
           "sd_diff": 0.614323,
           "mdd80": 0.384845,
           "reading": "not distinguishable"
+        },
+        {
+          "a": "hybrid",
+          "b": "bm25",
+          "metric": "recall@10",
+          "n": 20,
+          "mean_diff": -0.033333,
+          "ci95": [
+            -0.291667,
+            0.225
+          ],
+          "sd_diff": 0.601168,
+          "mdd80": 0.376604,
+          "reading": "not distinguishable"
+        },
+        {
+          "a": "hybrid",
+          "b": "bm25",
+          "metric": "mrr@10",
+          "n": 20,
+          "mean_diff": 0.027857,
+          "ci95": [
+            -0.172173,
+            0.232518
+          ],
+          "sd_diff": 0.464444,
+          "mdd80": 0.290953,
+          "reading": "not distinguishable"
+        },
+        {
+          "a": "hybrid",
+          "b": "bm25",
+          "metric": "ndcg@10",
+          "n": 20,
+          "mean_diff": -0.033643,
+          "ci95": [
+            -0.241956,
+            0.179553
+          ],
+          "sd_diff": 0.4884,
+          "mdd80": 0.30596,
+          "reading": "not distinguishable"
+        },
+        {
+          "a": "hybrid",
+          "b": "dense",
+          "metric": "recall@10",
+          "n": 20,
+          "mean_diff": 0.033333,
+          "ci95": [
+            -0.033333,
+            0.116667
+          ],
+          "sd_diff": 0.176052,
+          "mdd80": 0.110288,
+          "reading": "not distinguishable"
+        },
+        {
+          "a": "hybrid",
+          "b": "dense",
+          "metric": "mrr@10",
+          "n": 20,
+          "mean_diff": -0.0275,
+          "ci95": [
+            -0.181667,
+            0.1125
+          ],
+          "sd_diff": 0.342517,
+          "mdd80": 0.214571,
+          "reading": "not distinguishable"
+        },
+        {
+          "a": "hybrid",
+          "b": "dense",
+          "metric": "ndcg@10",
+          "n": 20,
+          "mean_diff": 0.005055,
+          "ci95": [
+            -0.096395,
+            0.097379
+          ],
+          "sd_diff": 0.224994,
+          "mdd80": 0.140948,
+          "reading": "not distinguishable"
         }
       ]
     }
@@ -346,6 +560,12 @@
           "system": "dense",
           "spans": 20,
           "seconds": 0.3858
+        },
+        {
+          "file": "traces/retrieval/shared-practice-hybrid.jsonl",
+          "system": "hybrid",
+          "spans": 20,
+          "seconds": 0.3157
         }
       ]
     },

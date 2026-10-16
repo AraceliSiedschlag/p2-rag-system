@@ -28,6 +28,16 @@ b = 0.4
 # The embedding model for p2/retrievers/dense.py, by its Hugging Face name.
 model = "BAAI/bge-small-en-v1.5"
 
+[hybrid]
+# The two systems p2/retrievers/hybrid.py fuses, and the k of reciprocal rank fusion:
+# each document scores the sum of 1 / (k + rank) over the systems' rankings.
+systems = ["bm25", "dense"]
+k = 60
+# How much each system's vote counts, in the same order as systems; [1, 1] is plain RRF.
+weights = [1, 2]
+# Each system votes only for its top `depth` documents (or chunks); 0 means its whole ranking.
+depth = 100
+
 [answer]
 # How many chunks `p2 answer` sends to Claude with each question.
 top = 5
