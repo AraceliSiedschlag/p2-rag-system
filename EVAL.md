@@ -25,7 +25,13 @@ The minimum detectable difference is the smallest gap this many queries could re
 
 For each of `dense`, `hybrid` and `rerank`, one or two sentences: the embedding model, how documents were chunked, what was fused and how, how many candidates the reranker saw, and anything you changed from the 12 and 13 lab code.
 
-TODO: describe your three systems.
+
+All documents for bm25 and dense were chunked the same using pieces of 300 words, where each piece shares 50 words with the one before it.
+Dense: The final dense used BAAI/bge-small-en-v1.5 model after testing 2 other models (potion-retrieval-32M and snowflake-arctic-embed-s) one where it was faster but scored lower and one that was about as slow and scored lower overall.
+Hybrid: Hybrid was fused using the RRF function with k = 60 with two document rankings the one from bm25 and the one from dense. Four versions of hybrid were tested ending with bm25 getting a voting weight of one and the dense getting a voting weight of two and a depth of 100 for ranking. 
+Rerank: This uses the hybrid top 20 documents with claude reading the first 600 characters of each one.  
+
+Compared with the lab 12 and 13 code, dense saw pieces of each document rather than the document as a whole. Additionally, the caching of vectors changed because vectors were cached per piece of text instead of one cache file for the whole corpus as in the lab. Then for hybrid weights and depth were added which differed from the lab and it blended piece rankings which the lab did not need. Finally, rerank used a different starting system because it started with the weighted hybrid and it has a stricter schema where each number must be between 1 and 20.
 
 ### Practice queries (20)
 
@@ -97,7 +103,9 @@ Which differences are distinguishable from zero and which are not?
 What is the minimum detectable difference at 20 queries, and what does that say about any gap smaller than it?
 Which claim from lecture 12 or 13 did your numbers support, and which did they leave open?
 
-TODO: write what the practice-query intervals let you claim.
+
+The differences that are distinguishable from zero are rerank which is higher than dense and higher than hybrid on nDCG, both of which have confidence intervals all above 0. Everything else includes zero so it is not distinguishable (MRR, Recall). At 20 questions the minimum detectable difference ranges from 0.11 to 0.42 depending on the pair and measure. For anything compared to bm25, it is larger about 0.29 to 0.42 because the others disagree from question to question. Most gaps are smaller than their MDD, such as hybrid minus bm25 on MRR, +0.028 against an MDD of 0.291, so 20 questions can't detect them. 
+Lecture 12 claimed that no single retriever wins both types of questions and this project supports it because bm25 has a MRR 0.81 on same word questions and 0.33 for dense, bm25 gave 0 on different words question and a 0.714 for dense. In lecture 13 it was claimed that reranking improves on the first stage this was supported on nDCG, the two rerank higher rows they are left open on MRR and recall. However, lab 13 hybrid beat both of its parts on the articles, but hybrid, in this project, landed between bm25 and dense in numbers and they were not distinguishable.
 
 ---
 
