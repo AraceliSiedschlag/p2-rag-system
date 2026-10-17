@@ -105,14 +105,16 @@ Which claim from lecture 12 or 13 did your numbers support, and which did they l
 
 
 The differences that are distinguishable from zero are rerank which is higher than dense and higher than hybrid on nDCG, both of which have confidence intervals all above 0. Everything else includes zero so it is not distinguishable (MRR, Recall). At 20 questions the minimum detectable difference ranges from 0.11 to 0.42 depending on the pair and measure. For anything compared to bm25, it is larger about 0.29 to 0.42 because the others disagree from question to question. Most gaps are smaller than their MDD, such as hybrid minus bm25 on MRR, +0.028 against an MDD of 0.291, so 20 questions can't detect them. 
-Lecture 12 claimed that no single retriever wins both types of questions and this project supports it because bm25 has a MRR 0.81 on same word questions and 0.33 for dense, bm25 gave 0 on different words question and a 0.714 for dense. In lecture 13 it was claimed that reranking improves on the first stage this was supported on nDCG, the two rerank higher rows they are left open on MRR and recall. However, lab 13 hybrid beat both of its parts on the articles, but hybrid, in this project, landed between bm25 and dense in numbers and they were not distinguishable.
+Lecture 12 claimed that no single retriever wins both types of questions and this project supports it because bm25 has a MRR 0.81 on same word questions and 0.33 for dense, bm25 gave 0 on different words question and a 0.714 for dense. In lecture 13 it was claimed that reranking improves on the first stage this was supported on nDCG, the two rerank higher rows they are left open on MRR and recall. However, lab 13 hybrid beat both of its parts on the articles, but hybrid, in this project, landed between bm25 and dense in numbers and they were not distinguishable, so whether fusion beats both of its parts on this corpus is left open.
 
 ---
 
 ## 2. Stage 1 - cited answers on the 12 shared questions
 
 <!-- p2:begin answers -->
-_No answers files yet: run `uv run p2 answer --corpus shared --system NAME`, then `uv run p2 score`._
+| Label | System | Verified (in) | 95% interval | not_found (in) | Declined (out) | 95% interval | Quotes found |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| rerank | rerank | 8 of 8 (100%) | [0.676, 1.000] | 0 of 8 (0%) | 4 of 4 (100%) | [0.510, 1.000] | 10 of 10 |
 <!-- p2:end answers -->
 
 Which system answered, and why that one?
@@ -122,7 +124,13 @@ Then read three in-corpus answers that `uv run p2 verify` passed.
 For each one, open the cited chunk and say whether the quote really supports the claim next to it.
 The check proves a quote is a real piece of the chunk and cannot prove that it supports the claim, so this reading is the part only you can do.
 
-TODO: write your answer choices and your three-answer audit.
+I have chosen rerank because it had the highest practice MRR (0.700) and nDCG distinguishably higher than hybrid and dense and it reorders hybrid's top 20 so that the best pieces come first, and then the top 5 pieces go to the answer step. I did not change anything in `prompts/answer.txt` so it verified 8 of 8, declined 4 of 4.
+
+a01: Supported yes - the quote gives the number (15 min) that the claim states and that death is an accident type required to call MSHA.
+
+a05: Supported yes - the quote correctly claims that new miners should receive no less than 40 hours of training.  
+
+a07: Supported yes - the quote correctly says the berms or guardrails shall be at least mid-axle height. The claim that the height requirement applied under parallel underground metal and nonmetal mine standard is supported by section 57.9300.
 
 ---
 
@@ -267,6 +275,7 @@ Every trace in traces/ that records a Claude call:
 
 | Trace | System | Spans | Claude calls | Saved | Input tokens | Output tokens | Seconds | Input per span | Output per span | Seconds per span |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| traces/answers-rerank.jsonl | rerank | 12 | 24 | 4 | 287,497 | 12,379 | 189.2 | 23,958 | 1,032 | 15.8 |
 | traces/shared-practice-rerank.jsonl | rerank | 20 | 20 | 2 | 337,063 | 14,535 | 199.0 | 16,853 | 727 | 9.9 |
 | traces/shared-test-rerank.jsonl | rerank | 40 | 40 | 0 | 653,814 | 26,893 | 368.2 | 16,345 | 672 | 9.2 |
 
