@@ -2,3 +2,34 @@
 # origin is hand when you wrote the query yourself and claude when a model drafted it; at least 10 must be hand.
 # class is a word you choose, for example identifier, paraphrase or mixed as in the shared sets; scores are reported per class.
 # Lines that start with # are comments, so delete these lines or keep them, as you like.
+
+o01	mixed	 What court did Allen v. Milligan get appealed from?	hand
+o02	identifier	What was the purpose of 52 U. S. C. § 10301?	hand
+o03	paraphrase	How does population growth change congressional maps?	hand
+o04	mixed	How many groups brought suits against the Alabama Secretary of State?	hand
+o05	mixed	How does the first amendment come into play in 303 Creative LLC v. Elenis?	hand
+o06	identifier	What does 547 u.s. at 61-64 do?	hand
+o07	paraphrase	Can businesses decline to work with or service people depending on their sexuality, religion, race, or sex?	hand
+o08	identifier	Who dissented in 303 Creative LLC v. Elenis?	hand
+o09	identifier	When was Counterman v. Colorado argued?	hand
+o10	paraphrase	Under what law can someone be charged after communicating with someone and causing them emotional distress? 	hand
+o11	identifier	Is 38 U.S.C. § 5110(b)(1) subject to equitable tolling?	claude
+o12	paraphrase	If a veteran misses the one-year window after leaving the military, can a court still let disability benefits start from the day after discharge?	claude
+o13	identifier	Under the Bank Secrecy Act, is the $10,000 penalty for a nonwillful failure to report foreign accounts counted per report or per account?	claude
+o14	paraphrase	Can someone who forgot to file the yearly form about bank accounts held abroad be fined separately for every account on the form?	claude
+o15	mixed	Does Bartenwerfer still owe a fraud debt in bankruptcy when only her business partner lied to the buyer?	claude
+o16	paraphrase	Is a worker paid a fixed amount for each day he works, and who earns over $200,000 a year, still owed overtime?	claude
+o17	identifier	Do the Securities Exchange Act and the FTC Act strip district courts of jurisdiction over constitutional challenges to the SEC or FTC?	claude
+o18	mixed	When does the statute of limitations start for Reed's § 1983 claim about DNA testing in Texas?	claude
+o19	paraphrase	Can social media companies be held responsible for a terrorist attack because terrorists used their platforms to recruit and spread propaganda?	claude
+o20	identifier	Did the Court decide whether Section 230 protects Google in Gonzalez v. Google?	claude
+o21	paraphrase	When a county sells a house to collect unpaid property taxes, can it keep the money left over after the debt is paid?	claude
+o22	identifier	What does "waters of the United States" in the Clean Water Act cover after Sackett v. EPA?	claude
+o23	paraphrase	When does a wetland count as part of a protected river or lake under federal pollution law?	claude
+o24	mixed	Does the Rogers test protect a dog toy that parodies the Jack Daniel's whiskey bottle?	claude
+o25	paraphrase	How much hardship must a business show before it can refuse to give an employee Sundays off for religious reasons?	claude
+o26	mixed	Did the Secretary of Education have authority under the HEROES Act to cancel student loan debt?	claude
+o27	paraphrase	Did the treaty that created the reservation require the federal government to build water projects for the tribe?	claude
+o28	identifier	What did Moore v. Harper hold about the Elections Clause and state courts?	claude
+o29	mixed	Must a district court pause the case while Coinbase appeals the denial of its motion to compel arbitration?	claude
+o30	paraphrase	Can a state make out-of-state companies agree to be sued there for anything as a condition of doing business in the state?	claude

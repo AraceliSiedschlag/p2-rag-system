@@ -2,3 +2,14 @@
 # rel is 1 for a relevant document, unless EVAL.md declares graded labels; every query needs at least one relevant document.
 # 598E: commit your filled-in PREREG.md before the first judgment line goes into this file.
 # Lines that start with # are comments.
+o01 0 599us1r33_dc8f__p001-005 2
+o02 0 599us1r33_dc8f__p001-005 1
+o02 0 599us1r33_dc8f__p026-030 1
+o02 0 599us1r33_dc8f__p051-055 1
+o02 0 599us1r33_dc8f__p086-090 1
+o03 0 599us1r33_dc8f__p001-005 2
+o03 0 599us1r33_dc8f__p016-020 1
+o04 0 599us1r33_dc8f__p001-005 2
+o04 0 599us1r33_dc8f__p016-020 1
+o05 0 600us1r58_7khn__p051-055 2
+o05 0 600us1r58_7khn__p031-035 1
