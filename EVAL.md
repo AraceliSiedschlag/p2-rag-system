@@ -171,6 +171,7 @@ Scores per system on your gold set.
 | dense | 0.814 | 0.622 | 0.606 |
 | hybrid | 0.856 | 0.634 | 0.622 |
 | rerank | 0.831 | 0.558 | 0.570 |
+| ablation/dense_potion | 0.833 | 0.562 | 0.571 |
 | ablation/rerank_chars | 0.900 | 0.663 | 0.659 |
 
 30 judged queries; nDCG uses graded labels; a random ranking of the 401 documents would get recall@10 near 0.025.
@@ -193,6 +194,9 @@ The same scores per query class.
 | rerank | Recall@10 | 0.938 | 0.742 | 0.833 |
 | rerank | MRR@10 | 0.750 | 0.439 | 0.528 |
 | rerank | nDCG@10 | 0.679 | 0.512 | 0.547 |
+| ablation/dense_potion | Recall@10 | 0.812 | 0.750 | 0.917 |
+| ablation/dense_potion | MRR@10 | 0.667 | 0.523 | 0.525 |
+| ablation/dense_potion | nDCG@10 | 0.634 | 0.560 | 0.539 |
 | ablation/rerank_chars | Recall@10 | 0.906 | 0.775 | 1.000 |
 | ablation/rerank_chars | MRR@10 | 0.737 | 0.600 | 0.665 |
 | ablation/rerank_chars | nDCG@10 | 0.691 | 0.596 | 0.690 |
@@ -216,6 +220,9 @@ Once both groups have queries, the table also says whether `bm25`'s lead over `d
 | rerank | Recall@10 | 0.675 | 0.908 | -0.233 | [-0.517, +0.042] | not distinguishable |
 | rerank | MRR@10 | 0.531 | 0.571 | -0.040 | [-0.332, +0.243] | not distinguishable |
 | rerank | nDCG@10 | 0.494 | 0.608 | -0.115 | [-0.351, +0.129] | not distinguishable |
+| ablation/dense_potion | Recall@10 | 0.650 | 0.925 | -0.275 | [-0.575, +0.000] | not distinguishable |
+| ablation/dense_potion | MRR@10 | 0.469 | 0.609 | -0.139 | [-0.453, +0.173] | not distinguishable |
+| ablation/dense_potion | nDCG@10 | 0.444 | 0.635 | -0.191 | [-0.431, +0.046] | not distinguishable |
 | ablation/rerank_chars | Recall@10 | 0.725 | 0.988 | -0.263 | [-0.500, -0.050] | claude higher |
 | ablation/rerank_chars | MRR@10 | 0.551 | 0.718 | -0.167 | [-0.440, +0.110] | not distinguishable |
 | ablation/rerank_chars | nDCG@10 | 0.537 | 0.720 | -0.183 | [-0.427, +0.068] | not distinguishable |
@@ -258,6 +265,18 @@ Differences between every pair of systems.
 | rerank minus hybrid | Recall@10 | -0.025 | [-0.117, +0.058] | 0.127 | not distinguishable |
 | rerank minus hybrid | MRR@10 | -0.077 | [-0.207, +0.046] | 0.184 | not distinguishable |
 | rerank minus hybrid | nDCG@10 | -0.052 | [-0.132, +0.018] | 0.110 | not distinguishable |
+| ablation/dense_potion minus bm25 | Recall@10 | -0.036 | [-0.169, +0.094] | 0.195 | not distinguishable |
+| ablation/dense_potion minus bm25 | MRR@10 | -0.072 | [-0.245, +0.094] | 0.248 | not distinguishable |
+| ablation/dense_potion minus bm25 | nDCG@10 | -0.073 | [-0.203, +0.045] | 0.182 | not distinguishable |
+| ablation/dense_potion minus dense | Recall@10 | +0.019 | [-0.094, +0.131] | 0.162 | not distinguishable |
+| ablation/dense_potion minus dense | MRR@10 | -0.060 | [-0.189, +0.065] | 0.187 | not distinguishable |
+| ablation/dense_potion minus dense | nDCG@10 | -0.034 | [-0.134, +0.052] | 0.135 | not distinguishable |
+| ablation/dense_potion minus hybrid | Recall@10 | -0.022 | [-0.136, +0.089] | 0.164 | not distinguishable |
+| ablation/dense_potion minus hybrid | MRR@10 | -0.072 | [-0.211, +0.056] | 0.196 | not distinguishable |
+| ablation/dense_potion minus hybrid | nDCG@10 | -0.051 | [-0.153, +0.037] | 0.140 | not distinguishable |
+| ablation/dense_potion minus rerank | Recall@10 | +0.003 | [-0.106, +0.108] | 0.155 | not distinguishable |
+| ablation/dense_potion minus rerank | MRR@10 | +0.005 | [-0.115, +0.124] | 0.173 | not distinguishable |
+| ablation/dense_potion minus rerank | nDCG@10 | +0.001 | [-0.083, +0.078] | 0.118 | not distinguishable |
 | ablation/rerank_chars minus bm25 | Recall@10 | +0.031 | [-0.094, +0.158] | 0.183 | not distinguishable |
 | ablation/rerank_chars minus bm25 | MRR@10 | +0.028 | [-0.112, +0.164] | 0.200 | not distinguishable |
 | ablation/rerank_chars minus bm25 | nDCG@10 | +0.015 | [-0.101, +0.123] | 0.160 | not distinguishable |
@@ -270,6 +289,9 @@ Differences between every pair of systems.
 | ablation/rerank_chars minus rerank | Recall@10 | +0.069 | [-0.017, +0.178] | 0.143 | not distinguishable |
 | ablation/rerank_chars minus rerank | MRR@10 | +0.105 | [-0.017, +0.228] | 0.180 | not distinguishable |
 | ablation/rerank_chars minus rerank | nDCG@10 | +0.089 | [+0.015, +0.176] | 0.119 | ablation/rerank_chars higher |
+| ablation/rerank_chars minus ablation/dense_potion | Recall@10 | +0.067 | [-0.008, +0.158] | 0.125 | not distinguishable |
+| ablation/rerank_chars minus ablation/dense_potion | MRR@10 | +0.100 | [-0.047, +0.255] | 0.223 | not distinguishable |
+| ablation/rerank_chars minus ablation/dense_potion | nDCG@10 | +0.088 | [-0.011, +0.197] | 0.153 | not distinguishable |
 
 The interval is a paired bootstrap (10,000 resamples of the queries); MDD is the smallest difference this many queries detect 80% of the time.
 <!-- p2:end own-pairs -->
@@ -292,6 +314,18 @@ The run file for it lives in `runs/own/ablation/`.
 <!-- p2:begin own-ablation -->
 | Comparison | Metric | Mean difference | 95% interval | MDD | Reading |
 | --- | --- | ---: | ---: | ---: | --- |
+| ablation/dense_potion minus bm25 | Recall@10 | -0.036 | [-0.169, +0.094] | 0.195 | not distinguishable |
+| ablation/dense_potion minus bm25 | MRR@10 | -0.072 | [-0.245, +0.094] | 0.248 | not distinguishable |
+| ablation/dense_potion minus bm25 | nDCG@10 | -0.073 | [-0.203, +0.045] | 0.182 | not distinguishable |
+| ablation/dense_potion minus dense | Recall@10 | +0.019 | [-0.094, +0.131] | 0.162 | not distinguishable |
+| ablation/dense_potion minus dense | MRR@10 | -0.060 | [-0.189, +0.065] | 0.187 | not distinguishable |
+| ablation/dense_potion minus dense | nDCG@10 | -0.034 | [-0.134, +0.052] | 0.135 | not distinguishable |
+| ablation/dense_potion minus hybrid | Recall@10 | -0.022 | [-0.136, +0.089] | 0.164 | not distinguishable |
+| ablation/dense_potion minus hybrid | MRR@10 | -0.072 | [-0.211, +0.056] | 0.196 | not distinguishable |
+| ablation/dense_potion minus hybrid | nDCG@10 | -0.051 | [-0.153, +0.037] | 0.140 | not distinguishable |
+| ablation/dense_potion minus rerank | Recall@10 | +0.003 | [-0.106, +0.108] | 0.155 | not distinguishable |
+| ablation/dense_potion minus rerank | MRR@10 | +0.005 | [-0.115, +0.124] | 0.173 | not distinguishable |
+| ablation/dense_potion minus rerank | nDCG@10 | +0.001 | [-0.083, +0.078] | 0.118 | not distinguishable |
 | ablation/rerank_chars minus bm25 | Recall@10 | +0.031 | [-0.094, +0.158] | 0.183 | not distinguishable |
 | ablation/rerank_chars minus bm25 | MRR@10 | +0.028 | [-0.112, +0.164] | 0.200 | not distinguishable |
 | ablation/rerank_chars minus bm25 | nDCG@10 | +0.015 | [-0.101, +0.123] | 0.160 | not distinguishable |
@@ -312,6 +346,28 @@ The queries your ablation helped and hurt, against the system it varies, by reci
 `p2 score` finds that system from a line such as `BASE = "bm25"` in your variant's file, or else from its name: `bm25_lab` varies `bm25`.
 
 <!-- p2:begin own-ablation-queries -->
+ablation/dense_potion against dense (BASE = "dense" in p2/retrievers/dense_potion.py): it helped 6 queries, hurt 11 and left 13 unchanged.
+
+| Query | Class | Origin | dense RR | ablation/dense_potion RR | Change | Effect |
+| --- | --- | --- | ---: | ---: | ---: | --- |
+| o16 | paraphrase | claude | 0.333 | 1.000 | +0.667 | helped |
+| o15 | mixed | claude | 0.500 | 1.000 | +0.500 | helped |
+| o17 | identifier | claude | 0.500 | 1.000 | +0.500 | helped |
+| o19 | paraphrase | claude | 0.500 | 1.000 | +0.500 | helped |
+| o07 | paraphrase | hand | 0.000 | 0.111 | +0.111 | helped |
+| o27 | paraphrase | claude | 0.250 | 0.333 | +0.083 | helped |
+| o01 | mixed | hand | 1.000 | 0.000 | -1.000 | hurt |
+| o30 | paraphrase | claude | 1.000 | 0.111 | -0.889 | hurt |
+| o10 | paraphrase | hand | 1.000 | 0.250 | -0.750 | hurt |
+| o29 | mixed | claude | 1.000 | 0.500 | -0.500 | hurt |
+| o05 | mixed | hand | 0.500 | 0.333 | -0.167 | hurt |
+| o13 | identifier | claude | 0.500 | 0.333 | -0.167 | hurt |
+| o25 | paraphrase | claude | 0.250 | 0.100 | -0.150 | hurt |
+| o14 | paraphrase | claude | 0.333 | 0.200 | -0.133 | hurt |
+| o22 | identifier | claude | 0.333 | 0.200 | -0.133 | hurt |
+| o23 | paraphrase | claude | 0.333 | 0.200 | -0.133 | hurt |
+| o28 | identifier | claude | 0.333 | 0.200 | -0.133 | hurt |
+
 ablation/rerank_chars against rerank (BASE = "rerank" in p2/retrievers/rerank_chars.py): it helped 13 queries, hurt 5 and left 12 unchanged.
 
 | Query | Class | Origin | rerank RR | ablation/rerank_chars RR | Change | Effect |
@@ -435,6 +491,7 @@ Systems that do not call Claude, from traces/retrieval/ on the machine that last
 
 | Trace | System | Queries | Seconds | Milliseconds per query |
 | --- | --- | ---: | ---: | ---: |
+| traces/retrieval/own-own-ablation-dense_potion.jsonl | dense_potion | 30 | 0.07 | 2.2 |
 | traces/retrieval/own-own-bm25.jsonl | bm25 | 30 | 0.07 | 2.4 |
 | traces/retrieval/own-own-dense.jsonl | dense | 30 | 0.75 | 25.0 |
 | traces/retrieval/own-own-hybrid.jsonl | hybrid | 30 | 0.44 | 14.7 |
