@@ -278,8 +278,9 @@ Which differences are distinguishable and which are not, at your gold-set size?
 Do the `hand` queries and the `claude` queries tell the same story?
 Did your prediction in `DECISIONS.md` prompt 1 hold?
 
-TODO: write what your own-corpus intervals let you claim.
+The intervals show that all four main systems are not distinguishable from each other when looking at MRR@10. The minimal detectable difference is between 0.09 and 0.23 on MRR@10 depending on the pair. Between bm25 and others it's large (0.19 to 0.23) because they disagree a lot from question to question. Between hybrid and dense it is small at 0.09 because those two rank very similarly. The only distinguishable results are from the ablation rerank_chars which beat rerank on nDCG and beats dense on recall. For hand questions MRR is not distinguishable for hand written and claude written questions.
 
+My predictions in prompt 1 did not hold because I thought bm25 would be the worst but in reality they are all not distinguishable for MRR. Also, because the differences were not distinguishable, my prompt 1 was wrong again with me guessing the reranker would be the best. 
 ---
 
 ## 5. The ablation
