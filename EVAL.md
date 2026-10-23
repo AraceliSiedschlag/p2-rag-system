@@ -391,6 +391,8 @@ Whichever option you chose, write these five things:
 For a second ablation, write its hypothesis here before you run it, and commit it, so your history shows that it came first.
 For the hand and claude queries, do the same with your prediction before you score.
 
+Hypothesis: I hypothesize that the potion will do worse than the bge small on my supreme court corpus overall. I believe this because when testing it wasn't better for the stage one corpus so I don't know why it would be for this one. Additionally, I think not reading it in context will hurt because legal arguments are very context based.
+
 ### Claim-level faithfulness check (option 2)
 
 Claude's verdicts from `p2 judge` against your own verdicts in the calibration file.
