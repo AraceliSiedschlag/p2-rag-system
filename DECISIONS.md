@@ -26,7 +26,7 @@ Commit this answer before your first `uv run p2 score` on the own corpus.
 Git history then shows that the expectation came first, which is what lets it be wrong in a way that teaches you something.
 If you were surprised later, say so in prompt 4 or in EVAL.md; do not come back and rewrite this one.
 
-TODO: your answer to prompt 1.
+I picked the supreme court opinions because I feel like more recently the supreme court continues to hear and make more landmark rulings so being able to use a RAG to understand those seems efficient. I think it is important to understand what is happening in the judicial world because it continues to have effects in our everyday lives swiftly and effectively. Additionally, supreme court documents are long and complicated so being able to just ask questions seems helpful. I think that rerank will win out because it utilizes all model, I don't think just using one is enough. I think bm25 will do the worst because its complicated wording so it wouldn't search as well. I have already ran uv run p2 score but I don't remember the numbers so I am writing this now before doing EVAL.md file stuff.
 
 ---
 
