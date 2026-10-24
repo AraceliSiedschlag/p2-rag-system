@@ -449,6 +449,14 @@ For the hand and claude queries, do the same with your prediction before you sco
 
 Hypothesis: I hypothesize that the potion will do worse than the bge small on my supreme court corpus overall. I believe this because when testing it wasn't better for the stage one corpus so I don't know why it would be for this one. Additionally, I think not reading it in context will hurt because legal arguments are very context based.
 
+
+1. The option's name: a second ablation, of a different kind (option 4).
+2. What you did, and the files: I swapped the embedding model for dense from bge-small to potion. p2/retrievers/dense_potion.py and runs/own/ablation/dense_potion.trec
+3. The tables: own-ablation and own-ablation-queries in section 5.
+4. What the interval lets you claim, and what it doesn't: The direction matched my hypothesis that it would not help overall, but the interval contains 0 so it was not distinguishable. For the questions it helped 6, hurt 11, and left 13 unchanged. It also lowered MRR and nDCG and recall went up but the interval contained 0 so it was not distinguishable. It did not help or hurt one type of specific questions. The two questions it helped the most were o16, and o15 where o16 the gold rank was at 1 for potion and 3 for bge-small then for o15 gold rank was at 1 for potion and 2 for bge-small. The ones it hurt the worst were o01 and o30, for o01 the gold was not in the ranking at all for o30 the gold was at rank 9 vs 1 for bge-small. This helps to show that potion did well when questions shared distinctive words with the answer but did badly when important words were common and where context mattered. This supports my hypothesis that potion would suffer because reading context is important for this type of work. 
+
+5. One next step, and what result would show it worked: One follow up experiment is to combine potion's strength with bge-small's if the fused system yields a higher MRR than bge-small's alone, with an interval above 0, that would show it worked.
+
 ### Claim-level faithfulness check (option 2)
 
 Claude's verdicts from `p2 judge` against your own verdicts in the calibration file.
