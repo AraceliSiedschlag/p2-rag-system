@@ -422,7 +422,7 @@ Then sort the failures by cause, for example a vocabulary mismatch, near-duplica
 
 
 Pattern Across them:
-After analyzing the failures were caused by three things near-duplicate parts, a gold set that was too narrow, and ambiguous questions when looking at all but one different-worded questions.
+After analyzing the failures were caused by three things near-duplicate parts, a gold set that was too narrow, and ambiguous questions and all but one of the failures were different words questions.
 
 
 
