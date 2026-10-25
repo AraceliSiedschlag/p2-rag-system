@@ -411,9 +411,21 @@ Take at least five, and read what the system returned next to what was relevant.
 Then sort the failures by cause, for example a vocabulary mismatch, near-duplicate documents, a chunk that cut the answer in half, a query that is ambiguous, or a label that was wrong, because sometimes the gold set is what failed.
 
 | qid | what the best system returned | what was relevant | cause | what you would try |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
+| o06 | Biden v. Nebraska p21–25 (`600us1r56_1o13__p021-025`) | 303 Creative p31–35 (rank 70) | ambiguous identifier | Write the question with the specific case|
+| o07 | 303 Creative p61–65, dissent (`600us1r58_7khn__p061-065`) | 303 Creative p26–30 (rank 13) | ambiguous | the question could be written in a more specific way to return the majority opinion |
+| o23 | Sackett p61–65, Kagan concurrence (`598us2r28_hgcj__p061-065`) | Sackett p26–30 (rank 6) and p31–35 | near-duplicate parts | Give concurring and dissenting opinions less weight|
+| o25 | Groff v. DeJoy p1–5, syllabus (`600us1r55_3dq4__p001-005`) | Groff v. DeJoy p21–25 (rank 5) | gold set | gold set was too narrow, should've included more documents|
+| o14 | Bittner p6–10 (`598us1r6_0813__p006-010`) | Bittner p11–15 (rank 4) and p16–20 | near-duplicate / framing part | I would use reranker and increase the number of characters seen|
+| o27 | Arizona v. Navajo Nation p6–10 (`599us1r44_54l8__p006-010`) | Navajo Nation p1–5 (rank 4) and p16–20 | gold set | the gold set was too narrow, should've expanded it |
 
-TODO: add one row for each failure you analyzed, and write two or three sentences on the pattern you see across them.
+
+
+Pattern Across them:
+After analyzing the failures were caused by three things near-duplicate parts, a gold set that was too narrow, and ambiguous questions when looking at all but one different-worded questions.
+
+
+
 
 ---
 
