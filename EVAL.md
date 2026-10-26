@@ -438,7 +438,46 @@ Did the winner change between the shared corpus and yours?
 Why, or why not: what is different about the two collections (document length, vocabulary, identifiers, near-duplicates, how the queries were written), and which of your explanations did you test and which are guesses?
 Say what 20 queries on one side and your gold-set size on the other cannot support.
 
-TODO: write the cross-corpus comparison.
+Scores copied from the `shared-practice`, `shared-practice-classes`, `own` and `own-classes` tables in sections 1 and 4 (MRR@10). The potion score on the shared corpus is from an uncommitted side run in stage 1.
+
+| System | Shared corpus (30 CFR, 20 practice queries) | Own corpus (Supreme Court OT2022, 30 queries) |
+| --- | ---: | ---: |
+| bm25 | 0.507 | 0.634 |
+| dense (bge-small) | 0.562 | 0.622 |
+| hybrid | 0.535 | 0.634 |
+| rerank (600 characters) | 0.700 | 0.558 |
+| ablation/rerank_chars (2,500 characters) | not run | 0.663 |
+| dense with potion | 0.475 (side run) | 0.562 (ablation) |
+
+MRR@10 by query class, shared corpus → own corpus (copied from the same tables):
+
+| System | identifier | paraphrase | mixed |
+| --- | ---: | ---: | ---: |
+| bm25 | 0.810 → 0.775 | 0.000 → 0.468 | 0.746 → 0.708 |
+| dense | 0.333 → 0.517 | 0.714 → 0.583 | 0.653 → 0.812 |
+| hybrid | 0.500 → 0.550 | 0.421 → 0.600 | 0.708 → 0.792 |
+| rerank | 0.429 → 0.439 | 0.714 → 0.528 | 1.000 → 0.750 |
+
+How the two collections differ (counted from `corpora/shared/docs` and `corpora/own/docs`; query overlap from the brief and the `own-origins` table):
+
+| | Shared corpus | Own corpus |
+| --- | --- | --- |
+| Documents | 2,484 sections | 401 parts (55 opinions in 5-page parts) |
+| Words per document | median 68 | median 1,655 |
+| Total words | 392,077 | 628,353 |
+| Start of each document | section number and heading | 55 opening parts start with the same cover notice |
+| Near-duplicates | the same rule in parts 56, 57, 75 and 77 | concurrences and dissents discussing the same holding |
+| Query word overlap with the answer | paraphrase 0.11, identifier 0.95, mixed 0.51 | hand 0.86, claude 0.82 |
+
+
+
+
+Why, or why not: what is different about the two collections (document length, vocabulary, identifiers, near-duplicates, how the queries were written), and which of your explanations did you test and which are guesses?
+Say what 20 queries on one side and your gold-set size on the other cannot support.
+
+There was no one clear winner between the shared corpus and mine because the MRR interval contained 0 so they were not distinguishable. However, for the shared corpus rerank with a 0.700 MRR was the highest and for my corpus bm25 and hybrid tied at 0.634 and rerank was last. So, while they were not distinguishable, looking at the raw numbers the system winners did change between corpuses. Yet, with 20 questions on the shared corpus and 30 on mine, the smallest differences we could detect were about 0.22 to 0.41 and 0.09 to 0.23 MRR. The change in winners describes the scores not a proven result. Additionally, the MRR on these small of questions cannot distinguish truth from chance.
+
+Some reasons that the system best changed could've been because the length of the document the shared corpus had a median of 68 words and the median length of mine was 1655 words. However, the near-duplicate concurrences and dissents may hurt on longer opinions in my corpus. Additionally, the shared corpus had 2484 documents and mine has 401 parts, so the amount of documents that had to be considered were less than. I tested the length of document by expanding the number of characters seen by the reranker to account for the extra length per document this then has rerank_chars report the highest MRR (but still not distinguishable). I'm guessing the number of documents (2,484 against 401) matters too, but I didn't test it nor that the near-duplicate concurrences and dissents hurt on longer opinions. Finally, a very large difference was how the questions were written. The instructor's different-word questions share almost no words with their answers but mine share a lot which is likely the reason bm25 went up.
 
 ---
 
