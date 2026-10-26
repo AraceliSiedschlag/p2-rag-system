@@ -41,7 +41,7 @@ If you rejected the alternative without measuring it, say why that was a fair ca
 "There was no alternative" is not an answer.
 Find the fork.
 
-TODO: your answer to prompt 2.
+One fork in the road for this project was choosing the model to use for dense. I chose to use bge-small but I looked at two bge-small and potion. By not choosing potion I gave up a slightly higher score on identifier questions but potion ran faster. I measured both on my supreme court corpus and the shared corpus getting 0.622 against 0.562 and 0.562 and 0.475 respectively. So, I gave up speed and a higher score on identifier questions (0.571 vs 0.333 shared) for better scores on paraphrase questions and overall.
 
 ---
 
@@ -57,7 +57,7 @@ What did you do instead?
 If it genuinely never happened, say so plainly, and then say what you would have had to check in order to notice.
 Being honest here costs you far less than a story you cannot defend when you record your video.
 
-TODO: your answer to prompt 3.
+Throughout this process I feel like Claude gives more questions and suggestions and lots of options making it difficult to overrule an agent, however, one time during this project that I overruled an agent was choosing the number of characters, not suggested, to read for the rerank_chars. Claude suggested a table of characters (600,3000,6000,10000) to choose from but I chose to do 2500 characters for my reranker because that felt more reasonable than 3000. 
 
 ---
 
@@ -69,7 +69,7 @@ It could be a mean over a small query class, a difference whose interval include
 What would have to be true for you to trust it?
 Did you do anything to test it, and what did that show?
 
-TODO: your answer to prompt 4.
+One number that I do not trust is the +0.105 MRR for rerank_chars. The reason that I do not fully trust this is that the interval contains zero. This could be because 30 questions cannot detect the difference because the minimum detectable difference for this pair is 0.180 and the +0.105 is well under it. Additionally, the score is from one run, to trust it more the score should be averaged and ran fresh. It was also scored on my own gold set which was found to be too narrow which could've hurt the score making it less accurate.  To trust this more would require testing with more questions, repeat runs, or fixing the gold set. Looking at nDCG@10 from the same run it rose by 0.089 with an interval completely above zero showing that there is gain and is distinguishable. Additionally, it helped 13 questions, hurt 5, and left 12 unchanged, but none of this was tested with repeat runs or additional questions.
 
 ---
 
@@ -80,4 +80,4 @@ One thing in your system, your corpus or your gold set that is not right, not fi
 What would you do next, and how would you find out whether it matters?
 Name the file, the query or the document where someone could look.
 
-TODO: your answer to prompt 5.
+One thing that is wrong with my system is that the gold set is too narrow. This was discovered in my failure analysis  where answers that failed normally still found relevant parts but that were not in my gold set. To show that the gold set is too narrow someone could look at o25 what was returned and what the gold set included, this would show that more documents than were chosen for the gold set were relevant. So to fix this I would expand my gold set to incorporate more documents related to the questions. 
